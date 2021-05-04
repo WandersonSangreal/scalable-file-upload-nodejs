@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+    server:
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        container_name: sfu-app
+        networks:
+            - server-network
+        volumes:
+            - ./app:/usr/src/app
+        command: sh -c "npm install"
+        ports:
+            - 3000:3000
+        tty: true
+
+    nginx:
+        build:
+            context: ./www
+            dockerfile: Dockerfile
+        container_name: sfu-nginx
+        networks:
+            - server-network
+        volumes:
+            - ./www/html:/var/www/html
+        ports:
+            - 8080:80
+        depends_on:
+            -   server
+
+networks:
+    server-network:
+        driver: bridge
