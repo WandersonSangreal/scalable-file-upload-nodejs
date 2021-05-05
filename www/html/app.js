@@ -141,8 +141,19 @@ const onload = _ => {
 
 	});
 
-	clientNode.on('file-uploaded', message => {
-		console.log('connected', message);
+	clientNode.on('uploading-bytes', bytes => {
+
+		totalBytes = totalBytes - bytes;
+
+		updateSize(totalBytes);
+
+	});
+
+	clientNode.on('finish-file', file => {
+
+		message.classList.add('text-success');
+		message.innerText = `File [${file}] uploaded successfull!`;
+
 	});
 
 	console.log("loaded");

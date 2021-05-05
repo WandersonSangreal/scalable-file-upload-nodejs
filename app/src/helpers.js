@@ -1,5 +1,6 @@
 const {promisify} = require('util');
 const {pipeline} = require('stream');
+const pipelineAsync = promisify(pipeline);
 
 const logger = require('pino')({
 	prettyPrint: {
@@ -8,5 +9,7 @@ const logger = require('pino')({
 });
 
 module.exports = {
-	logger
+	logger,
+	pipelineAsync,
+	promisify
 }

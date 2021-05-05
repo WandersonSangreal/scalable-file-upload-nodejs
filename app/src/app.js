@@ -2,6 +2,8 @@ const http = require('http');
 const ws = require('socket.io');
 const Routes = require('./routes');
 
+const {logger} = require('./helpers');
+
 const port = 3000;
 
 const handler = (request, response) => {
@@ -26,17 +28,15 @@ const io = ws(httpServer, {
 
 io.on('connection', node => {
 
-	console.log('soneone connected', node.id);
+	logger.info('soneone connected' + node.id);
 
 });
-
-// io.emit('file-uploaded', 'teste');
 
 const startServer = _ => {
 
 	const {address, port} = httpServer.address();
 
-	console.log(`app running at http://${address}:${port}`);
+	logger.info(`app running at http://${address}:${port}`);
 
 }
 

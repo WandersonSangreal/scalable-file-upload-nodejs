@@ -1,4 +1,5 @@
-const url = require('url');
+const {pipelineAsync, logger} = require('./helpers');
+const UploaderService = require('./uploader.service');
 
 class Routes {
 
@@ -10,25 +11,39 @@ class Routes {
 
 	}
 
+	options(request, response) {
+		response.writeHead(204, {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'OPTIONS,POST',
+		});
+		response.end();
+	}
+
 	async post(request, response) {
 
 		const {headers} = request;
 		const {searchParams} = new URL(request.url, headers.origin);
 
-		this.#io.to(searchParams.get('io')).emit('teste', 'teste');
+		// this.#io.to(searchParams.get('io')).emit('teste', 'teste');
 
-		const onFinish = (response, redirectTo) => {
+		const uploadService = new UploaderService(this.#io, searchParams.get('io'));
+
+		const onFinish = (request, response) => () => {
 
 			response.writeHead(303, {
 				Connection: 'close',
-				Location: redirectTo
+				Location: '/'
 			});
 
 			response.end();
 
 		}
 
-		return onFinish(response, headers.origin);
+		const busboy = uploadService.regiterEvents(headers, onFinish(request, response));
+
+		await pipelineAsync(request, busboy);
+
+		logger.info('request finished successfully');
 
 	}
 
