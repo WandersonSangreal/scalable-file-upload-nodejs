@@ -8,9 +8,6 @@ services:
         container_name: sfu-app
         networks:
             - server-network
-        volumes:
-            - ./app:/usr/src/app
-        command: sh -c "npm install"
         ports:
             - 3000:3000
         tty: true
