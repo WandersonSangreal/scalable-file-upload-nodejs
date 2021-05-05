@@ -17,6 +17,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
 	        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
 	        crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+	        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+	        crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -29,7 +32,7 @@
 				<div class="col-md">
 					<h4 class="text-center text-uppercase">Upload Files</h4>
 					<br>
-					<form id="form" method="post" enctype="multipart/form-data">
+					<form id="form" method="post" enctype="multipart/form-data" onsubmit="sendFiles()">
 						<div id="drop-area">
 
 							<div class="form-group mb-4">
@@ -64,8 +67,8 @@
 
 </div>
 
-<script src="app.js"></script>
 <script src="dragDrop.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>

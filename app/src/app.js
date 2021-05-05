@@ -1,5 +1,6 @@
 const http = require('http');
 const ws = require('socket.io');
+const Routes = require('./routes');
 
 const port = 3000;
 
@@ -7,7 +8,10 @@ const handler = (request, response) => {
 
 	const main = async (request, response) => response.end('OK');
 
-	return main(request, response);
+	const routes = new Routes(io);
+	const chosen = routes[request.method.toLowerCase()] || main;
+
+	return chosen.apply(routes, [request, response]);
 
 }
 
