@@ -9,6 +9,7 @@
 	      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css"
 	      integrity="sha512-N415hCJJdJx+1UBfULt+i+ihvOn42V/kOjOpp1UTh4CZ70Hx5bDlKryWaqEKfY/8EYOu/C2MuyaluJryK1Lb5Q=="
 	      crossorigin="anonymous"/>
+	<link rel="stylesheet" href="app.css">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/js/bootstrap.min.js"
 	        integrity="sha512-mp3VeMpuFKbgxm/XMUU4QQUcJX4AZfV5esgX72JQr7H7zWusV6lLP1S78wZnX2z9dwvywil1VHkHZAqfGOW7Nw=="
@@ -16,32 +17,55 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
 	        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
 	        crossorigin="anonymous"></script>
-
-	<script src="app.js"></script>
 </head>
 <body>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-4 mx-auto">
-			<br>
-			<br>
-			<h3>Upload Files</h3>
-			<br>
-			<form id="form" method="post" enctype="multipart/form-data">
-				<div class="form-group">
-					<label for="file">File:</label>
-					<input type="file" id="file" class="form-control" name="file" multiple onchange="showSize()">
-					<output class="span" id="size"></output>
+
+<div class="flex-container">
+
+	<div class="flex-section">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md">
+					<h4 class="text-center text-uppercase">Upload Files</h4>
 					<br>
-					<output class="span" id="messages"></output>
+					<form id="form" method="post" enctype="multipart/form-data">
+						<div id="drop-area">
+
+							<div class="form-group mb-4">
+								<label for="file" class="btn btn-light text-uppercase btn-lg">
+									Select or Drop Files
+								</label>
+								<input type="file" id="file" class="form-control" name="file" multiple
+								       onchange="showSize()">
+								<div class="text-center">
+									<output class="text-center" id="size"></output>
+									<br>
+									<output class="text-center" id="messages"></output>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="d-grid gap-2">
+										<button type="submit" class="btn btn-primary">Send</button>
+										<button type="reset" class="btn btn-dark">Reset</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
 				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Send</button>
-					<button type="reset" class="btn btn-dark">Reset</button>
-				</div>
-			</form>
+			</div>
 		</div>
+
 	</div>
+
 </div>
+
+<script src="app.js"></script>
+<script src="dragDrop.js"></script>
+
 </body>
 </html>

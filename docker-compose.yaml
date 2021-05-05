@@ -8,8 +8,8 @@ services:
         container_name: sfu-app
         networks:
             - server-network
-        ports:
-            - 3000:3000
+        volumes:
+            - ./app:/usr/src/app
         tty: true
 
     nginx:
@@ -24,7 +24,7 @@ services:
         ports:
             - 8080:80
         depends_on:
-            -   server
+            - server
 
 networks:
     server-network:

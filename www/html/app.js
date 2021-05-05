@@ -14,7 +14,7 @@ const formatBytes = (bytes, decimals = 2) => {
 	const m = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
 	const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-	return parseFloat((bytes / Math.pow(k, i)).toFixed(d) + ' ' + m[i]);
+	return String(parseFloat((bytes / Math.pow(k, i)).toFixed(d)) + ' ' + m[i]);
 
 }
 
