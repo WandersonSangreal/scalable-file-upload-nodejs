@@ -1,9 +1,5 @@
 let totalBytes = 0;
 
-const onload = _ => {
-	console.log("loaded");
-}
-
 const formatBytes = (bytes, decimals = 2) => {
 
 	if (bytes === 0)
@@ -45,6 +41,21 @@ const showSize = _ => {
 
 	// debugger
 
+}
+
+const onload = _ => {
+
+	const clientNode = io.connect('ws://127.0.0.1:8080', {withCredentials: false});
+
+	clientNode.on('connect', node => {
+		console.log('connected', clientNode.id);
+	});
+
+	clientNode.on('file-uploaded', message => {
+		console.log('connected', message);
+	});
+
+	console.log("loaded");
 }
 
 window.onload = onload;

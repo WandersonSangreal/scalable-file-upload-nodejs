@@ -1,4 +1,6 @@
 const http = require('http');
+const ws = require('socket.io');
+
 const port = 3000;
 
 const handler = (request, response) => {
@@ -9,10 +11,29 @@ const handler = (request, response) => {
 
 }
 
-const server = http.createServer(handler);
+const httpServer = http.createServer(handler);
+
+const io = ws(httpServer, {
+	cors: {
+		origin: '*',
+		credentials: false,
+	}
+});
+
+io.on('connection', node => {
+
+	console.log('soneone connected', node.id);
+
+});
+
+// io.emit('file-uploaded', 'teste');
 
 const startServer = _ => {
-	console.log(`app running at http://127.0.0.1:${port}`);
+
+	const {address, port} = httpServer.address();
+
+	console.log(`app running at http://${address}:${port}`);
+
 }
 
-server.listen(port, startServer);
+httpServer.listen(port, startServer);
